@@ -21,7 +21,7 @@ func main() {
 	var arr []string
 
 	for r.Scan() {
-		path := r.Text() // 0x0A separator = newline
+		path := r.Text()
 
 		arr = append(arr, path)
 	}
