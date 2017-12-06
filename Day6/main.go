@@ -51,7 +51,7 @@ func main() {
 		arr[current] = 0
 		for i := 0; i < kjor; i++{
 			if iterate == len(arr){
-				iterate = iterate - len(arr)
+				iterate = iterate - len(arr) //or just 0
 			}
 
 			arr[iterate]++
@@ -62,7 +62,6 @@ func main() {
 		cycles++
 
 		data := fmt.Sprint(arr)
-		fmt.Println(data)
 
 		exists := false
 		for r := range arr2{
