@@ -120,9 +120,7 @@ func main() {
 	fmt.Println(answer)
 
 	//PART 2
-
-	val := child_values(answer)
-
-	fmt.Println(val)
+	//function at the top
+	_ = child_values(answer)
 
 }
