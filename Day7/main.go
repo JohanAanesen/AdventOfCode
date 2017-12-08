@@ -74,10 +74,6 @@ func main() {
 	var nodes []string
 	var supported []string
 
-
-
-
-
 	for r.Scan() {
 		node := r.Text()
 
