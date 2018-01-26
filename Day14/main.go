@@ -72,6 +72,8 @@ func knot_hash(data []byte)string{
 	return hexString
 }
 
+
+
 func main() {
 
 	input := "ugkiagan"
@@ -99,10 +101,75 @@ func main() {
 
 	count := 0
 	for r := range dataMap{
+		fmt.Println(dataMap[r])
 		count += countOne(dataMap[r])
 	}
 
 	fmt.Println("Count: ", count)
+
+	//PART 2
+
+	var seen = make(map[int]map[int]bool)
+
+	init2D(seen)
+
+	groups := 0
+
+	for i := 0; i < 128; i++ {
+		for j := 0; j < 128; j++ {
+			if seen[i][j] == false {
+
+				vals := strings.Split(dataMap[i], "")
+				if vals[j] == "1" {
+					findGroup(i, j, dataMap, seen)
+					groups++
+				}
+			}
+		}
+	}
+
+	fmt.Println("Groups: ", groups)
+
+}
+
+func findGroup(i int, j int, dataMap map[int]string, seen map[int]map[int]bool){
+	if seen[i][j] == false{
+		seen[i][j] = true
+		vals := strings.Split(dataMap[i], "")
+		if vals[j] == "1" {
+			if i < 127{
+				findGroup(i+1, j, dataMap, seen)
+			}
+			if j < 127{
+				findGroup(i, j+1, dataMap, seen)
+			}
+			if j > 0{
+				findGroup(i, j-1, dataMap, seen)
+			}
+			if i > 0{
+				findGroup(i-1, j, dataMap, seen)
+			}
+		}else{
+			return
+		}
+	}else{
+		return
+	}
+}
+
+func init2D(s map[int]map[int]bool){
+
+	for i := 0; i < 128; i++{
+		ss, ok := s[i]
+
+		if !ok{
+			ss = make(map[int]bool)
+			s[i] = ss
+		}
+		ss[i] = false
+	}
+
+
 }
 
 func countOne(s string)int{
